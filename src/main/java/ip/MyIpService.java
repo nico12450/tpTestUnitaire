@@ -14,7 +14,7 @@ public class MyIpService {
 	public String getMyIp() {
 		Gson gson = new Gson();
 		String jsonIp = httpDataService.getJsonIp();
-		System.out.println(jsonIp);
+		//System.out.println(jsonIp);
 		Map<String, String> map = gson.<Map<String, String>>fromJson(jsonIp, Map.class);
 		return map.get("ip").split(",")[0];
 	}
