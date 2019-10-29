@@ -15,13 +15,14 @@ public class MyIpServiceTest {
 	public void before() {
 		
 		httpMock = Mockito.mock(HttpDataService.class);
-		Mockito.when(httpMock.getJsonIp()).thenReturn("{\"ip\":\"92.154.66.22\"}");
 		myIp = new MyIpService(httpMock);
 		
 	}
 	
 	@Test
 	public void testGetMyIp(){
+		
+		Mockito.when(httpMock.getJsonIp()).thenReturn("{\"ip\":\"92.154.66.22\"}");
 		
 		String ip = "92.154.66.22";
 		
@@ -32,9 +33,7 @@ public class MyIpServiceTest {
 	@Test
 	public void testGetMyIpBadUrl() {
 		
-		httpMock = Mockito.mock(HttpDataService.class);
 		Mockito.when(httpMock.getJsonIp()).thenThrow(new RuntimeException());
-		myIp = new MyIpService(httpMock);
 		assertEquals(myIp.getMyIp(),"no ip found for this adress");
 		
 	}
