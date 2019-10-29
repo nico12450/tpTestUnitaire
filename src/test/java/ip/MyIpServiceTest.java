@@ -2,12 +2,14 @@ package ip;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class MyIpServiceTest {
 	
 	private HttpDataService httpMock;
+	private MyIpService myIp;
 
 	/*
 	@Test
@@ -15,13 +17,17 @@ public class MyIpServiceTest {
 		//fail("Not yet implemented");
 	}*/
 	
-	@Test
-	public void testGetMyIp(){
-		
+	@Before
+	public void before() {
 		
 		httpMock = Mockito.mock(HttpDataService.class);
 		Mockito.when(httpMock.getJsonIp()).thenReturn("{\"ip\":\"92.154.66.22\"}");
-		MyIpService myIp = new MyIpService(httpMock);
+		myIp = new MyIpService(httpMock);
+		
+	}
+	
+	@Test
+	public void testGetMyIp(){
 		
 		String ip = "92.154.66.22";
 		
