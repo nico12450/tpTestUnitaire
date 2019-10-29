@@ -10,12 +10,6 @@ public class MyIpServiceTest {
 	
 	private HttpDataService httpMock;
 	private MyIpService myIp;
-
-	/*
-	@Test
-	public void test() {
-		//fail("Not yet implemented");
-	}*/
 	
 	@Before
 	public void before() {
@@ -32,6 +26,16 @@ public class MyIpServiceTest {
 		String ip = "92.154.66.22";
 		
 		assertEquals(myIp.getMyIp(),ip);
+		
+	}
+	
+	@Test
+	public void testGetMyIpBadUrl() {
+		
+		httpMock = Mockito.mock(HttpDataService.class);
+		Mockito.when(httpMock.getJsonIp()).thenThrow(new RuntimeException());
+		myIp = new MyIpService(httpMock);
+		assertEquals(myIp.getMyIp(),"no ip found for this adress");
 		
 	}
 
